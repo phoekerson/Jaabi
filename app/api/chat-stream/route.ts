@@ -18,7 +18,7 @@ export const POST = async (req: NextRequest) => {
 
         return aiUseChatAdapter(response)
 
-    } catch (error) {
+    } catch (_error) {
         return new Response("Une erreur est survenue.", { status: 500 })
     }
 

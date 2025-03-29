@@ -32,7 +32,7 @@ const Chat = ({decodedLink, sessionId, initialMessages}: {decodedLink: string, s
                 </div>
                 <p className='text-2xl mb-8'> En quoi puis-je vous aider ?</p>
                 <div className='grid md:grid-cols-2 gap-2'>
-                    <div className='bg-base-200 p-5 w-full rounded-3xl'>Qu'est-ce que ce site propose </div>
+                    <div className='bg-base-200 p-5 w-full rounded-3xl'>Qu est-ce que ce site propose </div>
                     <div className='bg-base-200 p-5 w-full rounded-3xl'> Comment fonctionne ce site  </div>
                     <div className='bg-base-200 p-5 w-full rounded-3xl'> Quels sont les services de ce site  </div>
                     <div className='bg-base-200 p-5 w-full rounded-3xl'> Fait moi un résumé de ce site </div>
