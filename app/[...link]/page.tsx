@@ -3,6 +3,7 @@ import Chat from '../components/Chat'
 import { cookies } from 'next/headers';
 import { redis } from '@/lib/redis';
 import { ragChat } from '@/lib/rag-chat';
+
 interface PageProps{
   params : {
     link?: string | string[];
@@ -12,14 +13,14 @@ function reconstructUrl({url}: {url: string[]}){
   const decodedComponents = url.map((component)=>decodeURIComponent(component))
   return decodedComponents.join('/');
 }
-const page = async({params}: PageProps) => {
+const Page = async({params}: PageProps) => {
 
   const sessionCookies = (await cookies()).get("sessionId")?.value
 
 
 
 
-  const awaitedParams = await params 
+  const awaitedParams = params 
   if(!awaitedParams?.link){
     return <div> Erreur, veuillez founrir un lien</div>
   }
@@ -49,4 +50,4 @@ const page = async({params}: PageProps) => {
   )
 }
 
-export default page
+export default Page
