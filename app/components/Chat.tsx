@@ -1,7 +1,8 @@
 "use client"
 import { Message, useChat } from 'ai/react'
-import { ArrowUp } from 'lucide-react'
+import { ArrowUp, Sparkle } from 'lucide-react'
 import React from 'react'
+import MessagesList from './MessagesList'
 
 const Chat = ({decodedLink, sessionId, initialMessages}: {decodedLink: string, sessionId?: string, initialMessages: Message[]}) => {
   const {messages, handleInputChange, handleSubmit, input} = useChat({
@@ -9,7 +10,6 @@ const Chat = ({decodedLink, sessionId, initialMessages}: {decodedLink: string, s
     body: {sessionId}, 
     initialMessages
   })
-
 
 
 
@@ -21,7 +21,32 @@ const Chat = ({decodedLink, sessionId, initialMessages}: {decodedLink: string, s
             </div>
         </div>
 
-        {/* <div></div> */}
+        <div className='w-full max-w*4xl rounded-lg space-y-4 flex-grow overflow-y-auto no-scrollbar mb-40 p-5'>
+          <div className='space-y-2'>
+            { messages.length === 0 ? (
+              <div className='p-4 flex justify-center items-center flex-col'>
+                
+                <div className='flex items-center'>
+                  <Sparkle className='w-10 h-10' />
+                    <h1 className='font-bold text-3xl my-4 text-primary'>Jaabi.ai</h1>
+                </div>
+                <p className='text-2xl mb-8'> En quoi puis-je vous aider ?</p>
+                <div className='grid md:grid-cols-2 gap-2'>
+                    <div className='bg-base-200 p-5 w-full rounded-3xl'>Qu'est-ce que ce site propose </div>
+                    <div className='bg-base-200 p-5 w-full rounded-3xl'> Comment fonctionne ce site  </div>
+                    <div className='bg-base-200 p-5 w-full rounded-3xl'> Quels sont les services de ce site  </div>
+                    <div className='bg-base-200 p-5 w-full rounded-3xl'> Fait moi un résumé de ce site </div>
+                
+                </div>
+              </div>
+
+            ):(
+              <MessagesList messages={messages}></MessagesList>
+            )}
+
+          </div>
+
+        </div>
 
         <form 
           onSubmit={handleSubmit}
