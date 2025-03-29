@@ -3,24 +3,20 @@ import Chat from '../components/Chat';
 import { cookies } from 'next/headers';
 import { redis } from '@/lib/redis';
 import { ragChat } from '@/lib/rag-chat';
-
-interface PageProps {
-  params: {
-    link: string[]; // Forcer le type en tableau de chaînes
-  };
-}
+import { PageProps } from 'next'; // Utilisation du type officiel de Next.js
 
 function reconstructUrl(url: string[]) {
   return url.map(decodeURIComponent).join('/');
 }
 
 const Page = async ({ params }: PageProps) => {
-  if (!params?.link || !Array.isArray(params.link)) {
+  if (!params?.link) {
     return <div>Erreur, veuillez fournir un lien valide</div>;
   }
 
-  const sessionCookies = (await cookies()).get("sessionId")?.value;
-  const decodedLink = reconstructUrl(params.link);
+  const sessionCookies = cookies().get("sessionId")?.value;
+  const linkArray = Array.isArray(params.link) ? params.link : [params.link];
+  const decodedLink = reconstructUrl(linkArray);
   const sessionId = (decodedLink + "__" + sessionCookies).replace(/\//g, "");
 
   const isAlreadyIndexed = await redis.sismember("indexed-urls", decodedLink);
