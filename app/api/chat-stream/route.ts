@@ -18,7 +18,8 @@ export const POST = async (req: NextRequest) => {
 
         return aiUseChatAdapter(response)
 
-    } catch (_error) {
+    } catch (error) {
+        console.log("Erreur lors de la récuperation de l'api dans le chat-stream", error)
         return new Response("Une erreur est survenue.", { status: 500 })
     }
 
